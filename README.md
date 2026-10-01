@@ -313,7 +313,7 @@ Dockerfile               two-stage image build
   swap is an ABI + config change confined to `src/claim/` (identical proof arguments).
 - **Outbox resolution depends on an unmerged creditcoin3 branch** — the
   `get_outbox_discovery_address` chain-info precompile getter `DiscoveryResolver` calls only exists
-  on `writeability-off-usc-dev`, not yet on `main`/`usc-dev`. **A route on a network without the
+  on creditcoin3's `asc-dev` (the write-ability trunk, formerly `writeability-off-usc-dev`), not yet on `main`/`dev` (formerly `usc-dev`). **A route on a network without the
   precompile, or whose chain key has no discovery address registered via
   `set_outbox_discovery_addr`, cannot resolve an Outbox at all** and fails closed by default.
   Confirm both are in place — precompile deployed, discovery address registered and pointing at
