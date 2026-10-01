@@ -73,10 +73,10 @@ pub struct Config {
     /// Outboxes and `eth_chainId` from this endpoint.
     pub creditcoin_eth_rpc_url: String,
     pub p2p: P2pConfig,
-    /// When set, the relayer sources votes from a spy node's WebSocket subscription instead of
-    /// embedding its own libp2p swarm — and publishes reobservation requests through that spy
+    /// When set, the relayer sources votes from an observer node's WebSocket subscription instead of
+    /// embedding its own libp2p swarm — and publishes reobservation requests through that observer
     /// (which must run `allow_publish: true`). The `p2p` section is ignored in this mode.
-    pub spy: Option<crate::spy_client::SpyClientConfig>,
+    pub observer: Option<crate::observer_client::ObserverClientConfig>,
     pub vote_cache: VoteCacheConfig,
     pub delivery: DeliveryConfig,
     pub routes: Vec<ChainRoute>,
@@ -346,7 +346,7 @@ impl Config {
             cc3_rpc_url,
             creditcoin_eth_rpc_url,
             p2p,
-            spy: None,
+            observer: None,
             vote_cache: VoteCacheConfig::default(),
             delivery: DeliveryConfig::default(),
             routes: vec![route],
@@ -404,7 +404,7 @@ pub struct ConfigFile {
     #[serde(default)]
     pub p2p: P2pConfigFile,
     #[serde(default)]
-    pub spy: Option<crate::spy_client::SpyClientConfig>,
+    pub observer: Option<crate::observer_client::ObserverClientConfig>,
     #[serde(default)]
     pub vote_cache: VoteCacheConfigFile,
     #[serde(default)]
@@ -618,7 +618,7 @@ impl ConfigFile {
                 no_mdns: self.p2p.no_mdns,
                 identity: self.p2p.identity,
             },
-            spy: self.spy,
+            observer: self.observer,
             vote_cache: VoteCacheConfig {
                 ttl_seconds: self.vote_cache.ttl_seconds,
                 max_messages: self.vote_cache.max_messages,

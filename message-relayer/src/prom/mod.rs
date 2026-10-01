@@ -744,7 +744,7 @@ async fn health_handler(
 }
 
 /// `GET /votes/{message_id}` — return the votes the relayer has accumulated for a message, so it
-/// acts as a queryable spy node (an operator or sibling relayer can ask what we have and act on it).
+/// acts as a queryable observer node (an operator or sibling relayer can ask what we have and act on it).
 /// `message_id` is a 0x-prefixed 32-byte hex string. 404 if we have not indexed it.
 async fn votes_handler(
     axum::extract::Path(id_str): axum::extract::Path<String>,

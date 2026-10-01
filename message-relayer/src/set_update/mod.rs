@@ -308,7 +308,7 @@ pub async fn run(
 
     loop {
         tokio::select! {
-            // Cancel first. On shutdown the p2p/spy vote source drops its sender at the same
+            // Cancel first. On shutdown the p2p/observer vote source drops its sender at the same
             // instant the token fires; without `biased` the closed-channel arm below could win the
             // race and log an ERROR for an orderly exit. It did, at 05:19:39 UTC on 2026-09-17,
             // and the network report read that line as the reason the relayer exited.
@@ -367,13 +367,13 @@ pub async fn run(
                     None => {
                         // All senders dropped. During shutdown that is the vote source draining
                         // ahead of us (the `biased` cancel arm normally wins, this is the backstop);
-                        // outside shutdown the p2p/spy source is gone and the supervisor should
+                        // outside shutdown the p2p/observer source is gone and the supervisor should
                         // hear about it as a failure, not a clean exit.
                         if cancel.is_cancelled() {
                             info!("🛑 attestor-set-update aggregator exiting on cancel");
                             return Ok(());
                         }
-                        error!("attestor-set-update vote channel closed outside shutdown — the p2p/spy vote source is gone; exiting");
+                        error!("attestor-set-update vote channel closed outside shutdown — the p2p/observer vote source is gone; exiting");
                         anyhow::bail!("attestor-set-update vote channel closed outside shutdown");
                     }
                 }
