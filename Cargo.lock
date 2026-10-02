@@ -4438,6 +4438,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "observer-node"
+version = "0.8.0"
+dependencies = [
+ "alloy",
+ "anyhow",
+ "axum",
+ "clap",
+ "dotenvy",
+ "futures",
+ "hex",
+ "libp2p",
+ "message-relayer",
+ "prometheus-client 0.25.0",
+ "serde",
+ "serde_json",
+ "serde_yaml",
+ "tokio",
+ "tokio-util",
+ "tracing",
+ "tracing-subscriber",
+ "write-ability",
+]
+
+[[package]]
 name = "oid-registry"
 version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5916,30 +5940,6 @@ name = "sponge-cursor"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3a0219bd7d979d58245a4f41f695e1ac9f8befdffadd7f61f1bae9e39abc6620"
-
-[[package]]
-name = "spy-node"
-version = "0.8.0"
-dependencies = [
- "alloy",
- "anyhow",
- "axum",
- "clap",
- "dotenvy",
- "futures",
- "hex",
- "libp2p",
- "message-relayer",
- "prometheus-client 0.25.0",
- "serde",
- "serde_json",
- "serde_yaml",
- "tokio",
- "tokio-util",
- "tracing",
- "tracing-subscriber",
- "write-ability",
-]
 
 [[package]]
 name = "stable_deref_trait"

@@ -56,7 +56,7 @@ const DELIVERY_CHANNEL_FULL_REQUEUE_DELAY: Duration = Duration::from_secs(2);
 pub(crate) const PRUNE_TICK_INTERVAL: Duration = Duration::from_secs(30);
 
 /// Snapshot of the votes accumulated for one message, answered by the pool over [`PoolQuery`] and
-/// served read-only at `GET /votes/{message_id}`. Lets a relayer act as a queryable "spy node":
+/// served read-only at `GET /votes/{message_id}`. Lets a relayer act as a queryable "observer node":
 /// an operator (or a sibling relayer) can ask what we have for a message and merge / act on it.
 #[derive(Clone, Debug, serde::Serialize)]
 pub struct VoteBundle {

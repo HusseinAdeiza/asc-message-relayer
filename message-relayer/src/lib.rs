@@ -43,6 +43,7 @@ pub mod dest_revert;
 pub mod events;
 pub mod hash;
 pub mod health;
+pub mod observer_client;
 pub mod outcome;
 pub mod p2p;
 pub mod pacing;
@@ -54,7 +55,6 @@ pub mod receipt;
 pub mod revert;
 pub mod rpc;
 pub mod set_update;
-pub mod spy_client;
 
 pub use config::{
     AttestorSet, AttestorSource, ChainRoute, Config, DeliveryConfig, P2pConfig, VoteCacheConfig,
@@ -379,16 +379,16 @@ impl Server {
             ),
         );
 
-        // Vote source: a spy-node WS subscription when configured, else the embedded libp2p
-        // swarm. The spy path is the target architecture (spy spec §1); the embedded swarm
+        // Vote source: an observer-node WS subscription when configured, else the embedded libp2p
+        // swarm. The observer path is the target architecture (observer spec §1); the embedded swarm
         // remains for standalone deployments and local dev.
         let route_chain_keys: Vec<u64> = self.config.routes.iter().map(|r| r.chain_key).collect();
-        if let Some(spy) = self.config.spy.clone() {
+        if let Some(observer) = self.config.observer.clone() {
             spawn_worker(
                 &mut tasks,
-                "spy client",
-                spy_client::run(
-                    spy,
+                "observer client",
+                observer_client::run(
+                    observer,
                     route_chain_keys,
                     vote_tx,
                     setupdate_vote_tx,
