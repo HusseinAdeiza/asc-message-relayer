@@ -31,7 +31,9 @@ pub mod factory;
 pub mod membership;
 
 pub use factory::{DiscoveryResolver, OutboxResolver, ResolvedOutbox};
-pub use membership::{active_outboxes, authorized_at, discovery_at};
+pub use membership::{
+    active_outboxes, authorized_at, discovery_at, pending_removal_at, registered_at,
+};
 
 /// Default poll cadence for re-checking whether [`OutboxResolver::resolve`] now returns a
 /// different address (an Outbox rotation). Independent of, and much slower than,
